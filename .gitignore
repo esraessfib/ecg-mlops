@@ -1,0 +1,6 @@
+data/
+mlecg/
+mlruns/
+__pycache__/
+*.pyc
+.env
