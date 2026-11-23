@@ -220,9 +220,15 @@ if __name__ == "__main__":
 
     print("Imputing missing values...")
     X_train, X_val, X_test = impute_features(X_train, X_val, X_test)
-    
-    train_logistic_regression(X_train, X_val, X_test, y_train, y_val, y_test)
-    train_xgboost(X_train, X_val, X_test, y_train, y_val, y_test)
+
+    lr_model  =train_logistic_regression(X_train, X_val, X_test, y_train, y_val, y_test)
+    xgb_model = train_xgboost(X_train, X_val, X_test, y_train, y_val, y_test)
+    import joblib
+
+    # Save the best model (XGBoost) and the scaler for the API
+    joblib.dump(xgb_model, "data/model_xgb.pkl")
+    joblib.dump(scaler,    "data/scaler.pkl")
+    print("\nModel and scaler saved to data/")
 
     print("\nAll runs logged. Launch MLflow UI with:")
     print("  mlflow ui")
